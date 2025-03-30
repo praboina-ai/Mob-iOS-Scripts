@@ -1,0 +1,50 @@
+-name: Setup iOS Build Environment
+hosts: ios_build
+become: yes
+tasks:
+- name: Install Homebrew
+  command: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  args:
+    creates: /usr/local/bin/brew
+
+- name: Install Xcode Command Line Tools
+  command: xcode-select --install
+  args:
+    creates: /Library/Developer/CommandLineTools
+  ignore_errors: yes
+
+- name: Install Xcode
+  command: brew install --cask xcode
+  args:
+    creates: /Applications/Xcode.app
+
+- name: Install Fastlane
+  command: brew install fastlane
+  args:
+    creates: /usr/local/bin/fastlane
+
+- name: Install CocoaPods
+  command: brew install cocoapods
+  args:
+    creates: /usr/local/bin/pod
+
+- name: Install Carthage
+  command: brew install carthage
+  args:
+    creates: /usr/local/bin/carthage
+
+- name: Install SwiftLint
+  command: brew install swiftlint
+  args:
+    creates: /usr/local/bin/swiftlint
+
+- name: Install SwiftFormat
+  command: brew install swiftformat
+  args:
+    creates: /usr/local/bin/swiftformat
+
+- name: Install SwiftDoc
+  command: brew install swiftdocorg/formulae/swiftdoc
+  args:
+    creates: /usr/local/bin/swiftdoc
+
